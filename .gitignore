@@ -1,0 +1,12 @@
+/Debug
+/Release
+/EnergySaver/Debug
+/EnergySaver/Release
+/EnergySaverCtrl/Debug
+/EnergySaverCtrl/Release
+/EnergySaverService/Debug
+/EnergySaverService/Release
+/MSISetup/Debug
+/MSISetup/Release
+/.vs
+/EnergySaver/EnergySaver.vcxproj.user
