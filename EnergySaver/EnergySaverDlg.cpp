@@ -70,6 +70,7 @@ void CEnergySaverDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT_OVERTIME_STATE, m_Edit_OvertimeState);
 	DDX_Control(pDX, IDC_STATIC_OP, m_static_op);
 	DDX_Control(pDX, IDC_CHECK_LOCK, m_Check_Lock);
+	DDX_Control(pDX, IDC_SYSLINK_WEBSITE, m_SysLink_Website);
 }
 
 BEGIN_MESSAGE_MAP(CEnergySaverDlg, CDialogEx)
@@ -88,6 +89,7 @@ BEGIN_MESSAGE_MAP(CEnergySaverDlg, CDialogEx)
 	ON_STN_CLICKED(IDC_STATIC_ICON, &CEnergySaverDlg::OnStnClickedStaticIcon)
 	ON_BN_CLICKED(ID_BUTTON_LOCK, &CEnergySaverDlg::OnBnClickedButtonLock)
 	ON_BN_CLICKED(IDC_CHECK_LOCK, &CEnergySaverDlg::OnBnClickedCheckLock)
+	ON_NOTIFY(NM_CLICK, IDC_SYSLINK_WEBSITE, &CEnergySaverDlg::OnNMClickSyslinkWebsite)
 END_MESSAGE_MAP()
 
 
@@ -390,6 +392,8 @@ DWORD CEnergySaverDlg::GetServiceState()
 		this->m_Edit_ServiceState.SetWindowText(TEXT("OpenSCManager失败"));
 	}
 
+	m_ServiceInstalled = false;
+
 	return 0;
 }
 void CEnergySaverDlg::ShowServiceState()
@@ -418,6 +422,15 @@ void CEnergySaverDlg::ShowServiceState()
 	case SERVICE_STOPPED:
 		this->m_Edit_ServiceState.SetWindowText(TEXT("SERVICE_STOPPED"));
 		break;
+	}
+
+	if (m_ServiceInstalled)
+	{
+		this->m_SysLink_Website.SetWindowTextW(TEXT("<a href=\"https://codetoys.github.io/EnergySaver/\">服务已安装</a>"));
+	}
+	else
+	{
+		this->m_SysLink_Website.SetWindowTextW(TEXT("<a href=\"https://codetoys.github.io/EnergySaver/\">服务未安装，单击打开网站</a>"));
 	}
 }
 
@@ -568,4 +581,12 @@ void CEnergySaverDlg::OnBnClickedCheckLock()
 {
 	// TODO: 在此添加控件通知处理程序代码
 	if (CheckChanged())Save();
+}
+
+void CEnergySaverDlg::OnNMClickSyslinkWebsite(NMHDR* pNMHDR, LRESULT* pResult)
+{
+	// TODO: 在此添加控件通知处理程序代码
+	PNMLINK pNMLink = (PNMLINK)pNMHDR;
+	ShellExecuteW(NULL, TEXT("open"), pNMLink->item.szUrl, NULL, NULL, SW_SHOWNORMAL);
+	*pResult = 0;
 }

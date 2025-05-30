@@ -54,6 +54,7 @@ public:
 	bool isStartHide;//启动时隐藏窗口
 	ServiceFunction sf;
 	bool m_Initing;//正在启动
+	bool m_ServiceInstalled = true;//服务是否已安装
 	DWORD GetServiceState();
 	void ShowOvertimeState();
 	void ShowServiceState();
@@ -69,4 +70,6 @@ public:
 	CButton m_Check_Lock;
 	afx_msg void OnBnClickedCheckLock();
 	CButton m_Check_IP_Report;
+	CLinkCtrl m_SysLink_Website;
+	afx_msg void OnNMClickSyslinkWebsite(NMHDR* pNMHDR, LRESULT* pResult);
 };
