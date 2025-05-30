@@ -28,6 +28,7 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MSISetup", "MSISetup\Setup.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionCommon", "SolutionCommon", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 	ProjectSection(SolutionItems) = preProject
+		index.html = index.html
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
